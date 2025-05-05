@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using MovieLib.Core;
+using MovieLib.Core.Repositories;
 using MovieLib.Database;
+using MovieLib.Database.Repositories;
+using MovieLib.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +18,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         builder.Configuration.GetConnectionString("DefaultConnection")
     )
 );
+
+// Register repositories
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+
+// Register services
+builder.Services.AddScoped<IMovieService, MovieService>();
 
 var app = builder.Build();
 
