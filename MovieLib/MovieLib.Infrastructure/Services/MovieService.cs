@@ -45,7 +45,7 @@ namespace MovieLib.Infrastructure.Services
                     Rating = review.Rating,
                     Comment = review.Comment,
                     ReviewerName = review.ReviewerName
-                }).ToList()
+                }).ToList() ?? new List<ReviewDto>()
             };
         }
     }

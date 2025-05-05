@@ -52,4 +52,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
+// Seed data to the database
+await DataSeeder.SeedDataAsync(app.Services);
+
 app.Run();
