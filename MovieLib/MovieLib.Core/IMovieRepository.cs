@@ -1,4 +1,5 @@
 using MovieLib.Core.Entities;
+using MovieLib.Core.DTOs;
 
 namespace MovieLib.Core.Repositories;
 
@@ -28,4 +29,12 @@ public interface IMovieRepository
     /// <param name="id">The ID of the movie to retrieve</param>
     /// <returns>The movie with its reviews, or null if not found</returns>
     Task<Movie?> GetMovieWithReviewsByIdAsync(int id);
+
+    /// <summary>
+    /// Updates a movie with the specified ID using the provided update data
+    /// </summary>
+    /// <param name="id">The ID of the movie to update</param>
+    /// <param name="updateDto">The data to update the movie with</param>
+    /// <returns>The updated movie, or null if not found</returns>
+    Task<Movie?> UpdateMovieAsync(int id, UpdateMovieDto updateDto);
 }

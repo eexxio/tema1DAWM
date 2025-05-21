@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MovieLib.Core.Entities;
 using MovieLib.Core.Repositories;
+using MovieLib.Core.DTOs;
 
 namespace MovieLib.Database.Repositories;
 
@@ -64,5 +65,35 @@ public class MovieRepository : IMovieRepository
         return await _context.Movies
             .Include(m => m.Reviews)
             .FirstOrDefaultAsync(m => m.Id == id);
+    }
+
+    public async Task<Movie?> UpdateMovieAsync(int id, UpdateMovieDto updateDto)
+    {
+        var movie = await _context.Movies.FindAsync(id);
+        if (movie == null)
+        {
+            return null;
+        }
+
+        // Update only the properties that are provided (not null)
+        if (updateDto.Title != null)
+        {
+            movie.Title = updateDto.Title;
+        }
+        if (updateDto.Description != null)
+        {
+            movie.Description = updateDto.Description;
+        }
+        if (updateDto.ReleaseDate.HasValue)
+        {
+            movie.ReleaseDate = updateDto.ReleaseDate.Value;
+        }
+        if (updateDto.Director != null)
+        {
+            movie.Director = updateDto.Director;
+        }
+
+        await _context.SaveChangesAsync();
+        return movie;
     }
 }

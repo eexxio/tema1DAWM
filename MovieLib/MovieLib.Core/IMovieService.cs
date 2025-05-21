@@ -30,5 +30,13 @@ namespace MovieLib.Core
         /// <param name="id">The id of the movie to retrieve</param>
         /// <returns>The movie with reviews or null if not found</returns>
         Task<MovieWithReviewsDto?> GetMovieWithReviewsByIdAsync(int id);
+
+        /// <summary>
+        /// Updates a movie with the specified ID using the provided update data
+        /// </summary>
+        /// <param name="id">The ID of the movie to update</param>
+        /// <param name="updateDto">The data to update the movie with</param>
+        /// <returns>The updated movie with reviews, or null if not found</returns>
+        Task<MovieWithReviewsDto?> UpdateMovieAsync(int id, UpdateMovieDto updateDto);
     }
 }

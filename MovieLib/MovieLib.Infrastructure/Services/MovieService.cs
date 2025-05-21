@@ -35,6 +35,12 @@ namespace MovieLib.Infrastructure.Services
             return movie != null ? MapToMovieWithReviewsDto(movie) : null;
         }
 
+        public async Task<MovieWithReviewsDto?> UpdateMovieAsync(int id, UpdateMovieDto updateDto)
+        {
+            var movie = await _movieRepository.UpdateMovieAsync(id, updateDto);
+            return movie != null ? MapToMovieWithReviewsDto(movie) : null;
+        }
+
         private MovieWithReviewsDto MapToMovieWithReviewsDto(Movie movie)
         {
             return new MovieWithReviewsDto

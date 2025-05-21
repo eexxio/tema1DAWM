@@ -58,5 +58,28 @@ namespace MovieLib.Api.Controllers
             
             return Ok(movie);
         }
+
+        /// <summary>
+        /// Updates a movie with the specified ID
+        /// </summary>
+        /// <param name="id">The ID of the movie to update</param>
+        /// <param name="updateDto">The data to update the movie with</param>
+        /// <returns>The updated movie with its reviews</returns>
+        /// <response code="200">Returns the updated movie with its reviews</response>
+        /// <response code="404">If the movie is not found</response>
+        [HttpPatch("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<MovieWithReviewsDto>> UpdateMovie(int id, UpdateMovieDto updateDto)
+        {
+            var movie = await _movieService.UpdateMovieAsync(id, updateDto);
+            
+            if (movie == null)
+            {
+                return NotFound($"Movie with ID {id} not found");
+            }
+            
+            return Ok(movie);
+        }
     }
 }
