@@ -25,9 +25,15 @@ namespace MovieLib.Api.Controllers
         /// <response code="200">Returns the list of movies with reviews</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<MovieWithReviewsDto>>> GetAllMovies()
+        public async Task<ActionResult<IEnumerable<MovieWithReviewsDto>>> GetAllMovies(
+            [FromQuery] string? title = null,
+            [FromQuery] string? director = null,
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10,
+            [FromQuery] string sortBy = "Title",
+            [FromQuery] string sortOrder = "asc")
         {
-            var movies = await _movieService.GetAllMoviesWithReviewsAsync();
+            var movies = await _movieService.GetAllMoviesWithReviewsAsync(title, director, page, pageSize, sortBy, sortOrder);
             return Ok(movies);
         }
 

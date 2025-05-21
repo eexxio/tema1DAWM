@@ -17,9 +17,15 @@ namespace MovieLib.Infrastructure.Services
             _movieRepository = movieRepository;
         }
 
-        public async Task<IEnumerable<MovieWithReviewsDto>> GetAllMoviesWithReviewsAsync()
+        public async Task<IEnumerable<MovieWithReviewsDto>> GetAllMoviesWithReviewsAsync(
+            string? title = null,
+            string? director = null,
+            int page = 1,
+            int pageSize = 10,
+            string sortBy = "Title",
+            string sortOrder = "asc")
         {
-            var movies = await _movieRepository.GetAllMoviesWithReviewsAsync();
+            var movies = await _movieRepository.GetAllMoviesWithReviewsAsync(title, director, page, pageSize, sortBy, sortOrder);
             return movies.Select(MapToMovieWithReviewsDto);
         }
 
