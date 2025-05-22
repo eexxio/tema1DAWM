@@ -44,3 +44,7 @@ artifacts/
 # SQL Server files
 *.mdf
 *.ldf
+
+# Additional files
+tema2.jpeg
+implementation_plan.md
